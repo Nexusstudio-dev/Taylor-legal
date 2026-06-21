@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Taylor Legal — Lawyer & Law Firm | Bellarine, Surf Coast & Geelong</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1B4332;
+    --forest-deep:#0F2E22;
+    --sage:#2D6A4F;
+    --cream:#F6F2E9;
+    --paper:#FCFAF5;
+    --ink:#1A1F1C;
+    --brass:#B08D57;
+    --brass-soft:#D8C2A0;
+    --line: rgba(27,67,50,0.14);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--cream);
+    color:var(--ink);
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces',serif;
+    font-weight:500;
+    letter-spacing:-0.01em;
+  }
+  a{text-decoration:none;color:inherit;}
+  img{max-width:100%;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+
+  /* reduced motion */
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  /* ---------- NAV ---------- */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:1000;
+    background:rgba(252,250,245,0.86);
+    backdrop-filter: blur(10px);
+    border-bottom:1px solid var(--line);
+    transition: background .3s ease;
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    max-width:1180px; margin:0 auto; padding:14px 28px;
+  }
+  .brand{display:flex; align-items:center; gap:12px;}
+  .brand-mark{width:40px;height:40px;flex-shrink:0;}
+  .brand-name{font-family:'Fraunces',serif; font-size:1.22rem; font-weight:600; color:var(--forest-deep); letter-spacing:0.01em;}
+  .brand-sub{display:block; font-family:'Inter',sans-serif; font-size:0.62rem; letter-spacing:0.16em; color:var(--sage); text-transform:uppercase; margin-top:1px;}
+  .nav-links{display:flex; gap:34px; font-size:0.88rem; font-weight:500;}
+  .nav-links a{position:relative; color:var(--forest-deep); padding:4px 0;}
+  .nav-links a::after{
+    content:""; position:absolute; left:0; bottom:0; width:0; height:1.5px; background:var(--brass);
+    transition:width .25s ease;
+  }
+  .nav-links a:hover::after{width:100%;}
+  .nav-cta{
+    background:var(--forest); color:var(--paper); padding:10px 22px; border-radius:3px;
+    font-size:0.85rem; font-weight:600; letter-spacing:0.02em;
+    transition: background .25s ease, transform .25s ease;
+  }
+  .nav-cta:hover{background:var(--forest-deep); transform:translateY(-1px);}
+  .nav-toggle{display:none;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    min-height:100vh;
+    display:flex; align-items:center;
+    background:
+      radial-gradient(circle at 78% 18%, rgba(176,141,87,0.10), transparent 55%),
+      linear-gradient(180deg, var(--forest-deep) 0%, var(--forest) 60%, #163a2c 100%);
+    color:var(--paper);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+    background-size: 64px 64px;
+    opacity:0.5;
+    mask-image: radial-gradient(circle at 70% 30%, black, transparent 70%);
+  }
+  .hero-grid{
+    position:relative; z-index:2;
+    display:grid; grid-template-columns: 1.15fr 0.85fr; gap:48px; align-items:center;
+    width:100%; max-width:1180px; margin:0 auto; padding:140px 28px 90px;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:10px;
+    font-size:0.72rem; letter-spacing:0.2em; text-transform:uppercase;
+    color:var(--brass-soft); margin-bottom:26px;
+    opacity:0; transform:translateY(10px);
+    animation: riseIn .8s ease forwards .15s;
+  }
+  .eyebrow::before{content:""; width:26px; height:1px; background:var(--brass-soft); display:inline-block;}
+  .hero h1{
+    font-size:clamp(2.4rem, 5vw, 4rem);
+    line-height:1.08;
+    font-weight:500;
+    color:#fff;
+    opacity:0; transform:translateY(16px);
+    animation: riseIn .9s ease forwards .3s;
+  }
+  .hero h1 em{font-style:italic; color:var(--brass-soft); font-weight:400;}
+  .hero p.lede{
+    margin-top:22px; max-width:480px; font-size:1.05rem; line-height:1.7;
+    color:rgba(246,242,233,0.82);
+    opacity:0; transform:translateY(16px);
+    animation: riseIn .9s ease forwards .5s;
+  }
+  .hero-actions{
+    margin-top:38px; display:flex; gap:16px; flex-wrap:wrap;
+    opacity:0; transform:translateY(16px);
+    animation: riseIn .9s ease forwards .65s;
+  }
+  .btn-primary{
+    background:var(--brass); color:var(--forest-deep); padding:15px 30px; border-radius:3px;
+    font-weight:600; font-size:0.92rem; letter-spacing:0.01em;
+    transition: transform .25s ease, box-shadow .25s ease, background .25s ease;
+    box-shadow:0 0 0 0 rgba(176,141,87,0.4);
+  }
+  .btn-primary:hover{background:#c4a06c; transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(176,141,87,0.55);}
+  .btn-ghost{
+    border:1px solid rgba(246,242,233,0.35); color:var(--paper); padding:15px 28px; border-radius:3px;
+    font-weight:600; font-size:0.92rem;
+    transition: border-color .25s ease, background .25s ease;
+  }
+  .btn-ghost:hover{border-color:rgba(246,242,233,0.7); background:rgba(255,255,255,0.06);}
+
+  .areas-strip{
+    margin-top:54px; display:flex; gap:10px; flex-wrap:wrap;
+    opacity:0; animation: riseIn .9s ease forwards .8s;
+  }
+  .areas-strip span{
+    font-size:0.74rem; letter-spacing:0.05em; color:rgba(246,242,233,0.65);
+    border:1px solid rgba(246,242,233,0.18); padding:6px 13px; border-radius:20px;
+  }
+
+  /* seal / monogram animation */
+  .seal-stage{
+    position:relative; z-index:2; display:flex; align-items:center; justify-content:center;
+  }
+  .seal-ring{
+    position:relative; width:340px; height:340px; max-width:80vw;
+  }
+  .seal-ring svg{width:100%; height:100%; display:block;}
+  .seal-circle-bg{
+    fill:none; stroke:rgba(246,242,233,0.12); stroke-width:1;
+  }
+  .seal-orbit-text{
+    font-family:'Inter',sans-serif; font-size:10.4px; letter-spacing:3.2px; fill:rgba(216,194,160,0.75);
+  }
+  .seal-letters path{
+    fill:none;
+    stroke:#F6F2E9;
+    stroke-width:5.5;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray: 420;
+    stroke-dashoffset: 420;
+    animation: draw 2.2s cubic-bezier(.65,0,.35,1) forwards 1s;
+  }
+  .seal-letters path.fill-after{
+    animation: draw 2.2s cubic-bezier(.65,0,.35,1) forwards 1s, fillIn 0.6s ease forwards 3s;
+  }
+  .seal-ring .orbit-spin{
+    transform-origin:50% 50%;
+    animation: spin 40s linear infinite;
+  }
+  .seal-stamp-ring{
+    stroke:var(--brass-soft); stroke-width:1; fill:none; opacity:0;
+    animation: ringIn 1s ease forwards 3.1s;
+  }
+
+  @keyframes draw{ to{ stroke-dashoffset:0; } }
+  @keyframes fillIn{ to{ fill:#F6F2E9; } }
+  @keyframes ringIn{ from{opacity:0; transform:scale(0.8);} to{opacity:1; transform:scale(1);} }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes riseIn{ to{ opacity:1; transform:translateY(0); } }
+
+  /* ---------- SECTION GENERIC ---------- */
+  section{padding:108px 0;}
+  .section-head{max-width:620px; margin-bottom:60px;}
+  .kicker{
+    font-size:0.74rem; letter-spacing:0.22em; text-transform:uppercase; color:var(--sage);
+    font-weight:600; margin-bottom:16px; display:block;
+  }
+  .section-head h2{font-size:clamp(1.8rem,3.4vw,2.6rem); color:var(--forest-deep); line-height:1.18;}
+  .section-head p{margin-top:18px; color:#4b5a52; font-size:1.02rem; line-height:1.7; max-width:560px;}
+
+  .reveal{opacity:0; transform:translateY(28px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+
+  /* ---------- APPROACH ---------- */
+  .approach{background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .approach-grid{display:grid; grid-template-columns: repeat(3,1fr); gap:36px;}
+  .approach-card{
+    padding:36px 30px; background:var(--cream); border-radius:6px; border:1px solid var(--line);
+    transition: transform .35s ease, box-shadow .35s ease, border-color .35s ease;
+  }
+  .approach-card:hover{transform:translateY(-6px); box-shadow:0 20px 40px -24px rgba(15,46,34,0.35); border-color:var(--sage);}
+  .approach-num{
+    font-family:'Fraunces',serif; font-size:0.85rem; color:var(--brass); letter-spacing:0.06em; margin-bottom:18px; display:block;
+  }
+  .approach-card h3{font-size:1.18rem; color:var(--forest-deep); margin-bottom:12px; font-weight:500;}
+  .approach-card p{font-size:0.93rem; line-height:1.65; color:#52605a;}
+
+  /* ---------- SERVICES ---------- */
+  .services{background:var(--cream);}
+  .service-list{display:flex; flex-direction:column;}
+  .service-row{
+    display:grid; grid-template-columns: 70px 1.4fr 1.6fr; gap:30px; align-items:start;
+    padding:32px 0; border-top:1px solid var(--line);
+    transition: background .3s ease;
+  }
+  .service-row:last-child{border-bottom:1px solid var(--line);}
+  .service-row:hover{background:rgba(176,141,87,0.05);}
+  .service-tag{font-family:'Fraunces',serif; color:var(--brass); font-size:0.95rem; padding-top:4px;}
+  .service-row h3{font-size:1.32rem; color:var(--forest-deep); font-weight:500;}
+  .service-row p{color:#52605a; font-size:0.95rem; line-height:1.65; padding-top:4px;}
+
+  /* ---------- AREAS MAP STRIP ---------- */
+  .areas{
+    background:var(--forest-deep); color:var(--paper); position:relative; overflow:hidden;
+  }
+  .areas::before{
+    content:""; position:absolute; inset:0;
+    background-image: radial-gradient(circle at 20% 50%, rgba(176,141,87,0.12), transparent 45%);
+  }
+  .areas .wrap{position:relative; z-index:2;}
+  .areas-flex{display:flex; flex-wrap:wrap; gap:14px 16px; margin-top:34px;}
+  .area-pill{
+    border:1px solid rgba(246,242,233,0.22); padding:10px 20px; border-radius:30px; font-size:0.92rem;
+    display:flex; align-items:center; gap:8px;
+    transition: border-color .25s ease, background .25s ease;
+  }
+  .area-pill:hover{border-color:var(--brass-soft); background:rgba(255,255,255,0.05);}
+  .area-pill .dot{width:6px; height:6px; border-radius:50%; background:var(--brass-soft); display:inline-block;}
+
+  /* ---------- TESTIMONIALS ---------- */
+  .testimonials{background:var(--paper);}
+  .t-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .t-card{
+    background:var(--cream); border:1px solid var(--line); border-radius:6px; padding:34px 28px;
+    position:relative; transition:transform .35s ease, box-shadow .35s ease;
+  }
+  .t-card:hover{transform:translateY(-5px); box-shadow:0 18px 36px -22px rgba(15,46,34,0.3);}
+  .t-quote-mark{font-family:'Fraunces',serif; font-size:2.6rem; color:var(--brass-soft); line-height:1; display:block; margin-bottom:6px;}
+  .t-card p.quote{font-size:0.96rem; line-height:1.68; color:#3c4a43; font-style:italic;}
+  .t-card .who{margin-top:20px; font-size:0.82rem; color:var(--sage); font-weight:600; letter-spacing:0.02em;}
+
+  /* ---------- CTA ---------- */
+  .cta{
+    background: linear-gradient(135deg, var(--forest) 0%, var(--forest-deep) 100%);
+    color:var(--paper); text-align:center; position:relative; overflow:hidden;
+  }
+  .cta::after{
+    content:""; position:absolute; width:600px; height:600px; border-radius:50%;
+    border:1px solid rgba(246,242,233,0.08); top:-300px; right:-200px;
+  }
+  .cta h2{font-size:clamp(1.9rem,4vw,2.8rem); color:#fff; margin-bottom:18px;}
+  .cta p{max-width:520px; margin:0 auto 36px; color:rgba(246,242,233,0.78); line-height:1.7;}
+  .cta-actions{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--forest-deep); color:rgba(246,242,233,0.6); padding:56px 0 30px; border-top:1px solid rgba(246,242,233,0.08);}
+  .footer-grid{display:grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px;}
+  .footer-brand{display:flex; align-items:center; gap:12px; margin-bottom:14px;}
+  .footer-brand .brand-mark{width:34px;height:34px;}
+  .footer-brand span{font-family:'Fraunces',serif; font-size:1.1rem; color:#fff;}
+  footer p.tag{font-size:0.88rem; line-height:1.6; max-width:280px;}
+  footer h4{font-size:0.78rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--brass-soft); margin-bottom:16px; font-weight:600;}
+  footer ul{list-style:none; display:flex; flex-direction:column; gap:10px; font-size:0.88rem;}
+  footer ul a{transition:color .2s ease;}
+  footer ul a:hover{color:#fff;}
+  .footer-bottom{
+    border-top:1px solid rgba(246,242,233,0.08); padding-top:24px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.78rem;
+  }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .hero-grid{grid-template-columns:1fr; gap:60px; padding-top:130px;}
+    .seal-stage{order:-1;}
+    .seal-ring{width:240px; height:240px;}
+    .approach-grid{grid-template-columns:1fr;}
+    .t-grid{grid-template-columns:1fr;}
+    .service-row{grid-template-columns:50px 1fr; }
+    .service-row p{grid-column:1/-1; padding-left:0;}
+    .footer-grid{grid-template-columns:1fr 1fr;}
+  }
+  @media (max-width: 760px){
+    .nav-links{display:none;}
+    .nav-toggle{display:block; background:none; border:none; cursor:pointer;}
+    .nav-toggle svg{width:24px;height:24px;}
+    .nav-links.open{
+      display:flex; position:absolute; top:100%; left:0; right:0; background:var(--paper);
+      flex-direction:column; padding:20px 28px; gap:18px; border-bottom:1px solid var(--line);
+    }
+    .footer-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header id="siteHeader">
+  <nav>
+    <a href="#top" class="brand">
+      <svg class="brand-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="32" cy="32" r="31" fill="#1B4332"/>
+        <path d="M16 20 H34" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+        <path d="M22 20 V44" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+        <path d="M30 44 L46 18" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+        <path d="M34 44 L46 30" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+      </svg>
+      <span>
+        <span class="brand-name">Taylor Legal</span>
+        <span class="brand-sub">Lawyer &amp; Law Firm</span>
+      </span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#approach">Our Approach</a>
+      <a href="#services">Our Services</a>
+      <a href="#areas">Areas We Serve</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="nav-cta">Book a Consult</a>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#1B4332" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div class="hero-grid">
+    <div>
+      <span class="eyebrow">Bellarine · Surf Coast · Mount Duneed · Geelong</span>
+      <h1>Guiding you with clarity,<br><em>protecting you</em> with purpose.</h1>
+      <p class="lede">Taylor Legal is a local law firm built around plain-English advice and steady hands — for the contracts, properties, and life decisions that matter most.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Book a Consultation</a>
+        <a href="#services" class="btn-ghost">Explore Our Services</a>
+      </div>
+      <div class="areas-strip">
+        <span>Wills &amp; Estates</span>
+        <span>Conveyancing</span>
+        <span>Power of Attorney</span>
+        <span>First Home Buyers</span>
+      </div>
+    </div>
+
+    <div class="seal-stage">
+      <div class="seal-ring">
+        <svg viewBox="0 0 200 200">
+          <circle class="seal-circle-bg" cx="100" cy="100" r="92"/>
+          <g class="orbit-spin">
+            <circle class="seal-stamp-ring" cx="100" cy="100" r="78"/>
+            <text class="seal-orbit-text">
+              <textPath href="#circlePath" startOffset="0%">
+                TAYLOR LEGAL · EST. TRUST · GUIDANCE · PURPOSE ·
+              </textPath>
+            </text>
+          </g>
+          <path id="circlePath" d="M100,100 m-66,0 a66,66 0 1,1 132,0 a66,66 0 1,1 -132,0" fill="none"/>
+          <g class="seal-letters" transform="translate(48,46) scale(1.05)">
+            <path class="fill-after" d="M10 10 H58" />
+            <path class="fill-after" d="M30 10 V72" />
+            <path class="fill-after" d="M44 72 L88 6" />
+            <path class="fill-after" d="M52 72 L88 36" />
+          </g>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="approach" id="approach">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Our Approach</span>
+      <h2>Law, explained like a conversation — not a contract.</h2>
+      <p>We translate the legal jargon into plain language, so you always know exactly where you stand before you sign anything.</p>
+    </div>
+    <div class="approach-grid">
+      <div class="approach-card reveal">
+        <span class="approach-num">Clarity</span>
+        <h3>Plain-English advice</h3>
+        <p>No dense legalese — every recommendation is explained in terms you can act on with confidence.</p>
+      </div>
+      <div class="approach-card reveal">
+        <span class="approach-num">Care</span>
+        <h3>A relationship, not a transaction</h3>
+        <p>We get to know your circumstances properly, so the advice fits your life — not a generic template.</p>
+      </div>
+      <div class="approach-card reveal">
+        <span class="approach-num">Commitment</span>
+        <h3>Local, responsive, dependable</h3>
+        <p>Based in the region we serve, with the responsiveness of a firm that knows your name, not your file number.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Our Services</span>
+      <h2>Support for the moments that matter.</h2>
+      <p>From your first home to your final wishes, Taylor Legal handles the legal details so you can focus on what's ahead.</p>
+    </div>
+    <div class="service-list">
+      <div class="service-row reveal">
+        <span class="service-tag">01</span>
+        <h3>Wills &amp; Estate Planning</h3>
+        <p>Online and in-person will services, powers of attorney, and estate planning that protects the people you care about — including guidance on what happens if you pass away without a will.</p>
+      </div>
+      <div class="service-row reveal">
+        <span class="service-tag">02</span>
+        <h3>Conveyancing</h3>
+        <p>Buying, selling, or transferring property across the Bellarine and Surf Coast — handled with the diligence a contract this size deserves.</p>
+      </div>
+      <div class="service-row reveal">
+        <span class="service-tag">03</span>
+        <h3>Power of Attorney</h3>
+        <p>Put the right safeguards in place ahead of time, so trusted people can act for you if you're ever unable to act for yourself.</p>
+      </div>
+      <div class="service-row reveal">
+        <span class="service-tag">04</span>
+        <h3>First Home Buyers</h3>
+        <p>Straightforward guidance through contract review, cooling-off periods, and settlement — built for buyers doing this for the first time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="areas" id="areas">
+  <div class="wrap">
+    <div class="section-head reveal" style="margin-bottom:0;">
+      <span class="kicker" style="color:var(--brass-soft)">Areas We Serve</span>
+      <h2 style="color:#fff;">Local to the region, end to end.</h2>
+    </div>
+    <div class="areas-flex reveal">
+      <span class="area-pill"><span class="dot"></span> Bellarine Peninsula</span>
+      <span class="area-pill"><span class="dot"></span> Surf Coast</span>
+      <span class="area-pill"><span class="dot"></span> Mount Duneed</span>
+      <span class="area-pill"><span class="dot"></span> Geelong</span>
+      <span class="area-pill"><span class="dot"></span> Wider Victoria</span>
+    </div>
+  </div>
+</section>
+
+<section class="testimonials" id="testimonials">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="kicker">Testimonials</span>
+      <h2>What clients say after working with us.</h2>
+    </div>
+    <div class="t-grid">
+      <div class="t-card reveal">
+        <span class="t-quote-mark">“</span>
+        <p class="quote">Made what felt like an overwhelming process simple and stress-free. Every question was answered before I'd even finished asking it.</p>
+        <div class="who">— First home buyer, Geelong</div>
+      </div>
+      <div class="t-card reveal">
+        <span class="t-quote-mark">“</span>
+        <p class="quote">Sorted our wills and power of attorney in plain English, with genuine patience for all our questions. Couldn't recommend more.</p>
+        <div class="who">— Estate planning client, Surf Coast</div>
+      </div>
+      <div class="t-card reveal">
+        <span class="t-quote-mark">“</span>
+        <p class="quote">Settlement day went off without a hitch. Responsive, organised, and clearly across every detail of our contract.</p>
+        <div class="who">— Property buyer, Bellarine</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div class="wrap">
+    <h2>Let's talk about what's ahead.</h2>
+    <p>Whether it's your first property or your estate plan, a short conversation is the best place to start.</p>
+    <div class="cta-actions">
+      <a href="#" class="btn-primary">Book a Consultation</a>
+      <a href="#" class="btn-ghost">Message Us</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">
+          <svg class="brand-mark" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="31" fill="#2D6A4F"/>
+            <path d="M16 20 H34" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+            <path d="M22 20 V44" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+            <path d="M30 44 L46 18" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+            <path d="M34 44 L46 30" stroke="#F6F2E9" stroke-width="3.6" stroke-linecap="round"/>
+          </svg>
+          <span>Taylor Legal</span>
+        </div>
+        <p class="tag">Guiding you with clarity, protecting you with purpose. Servicing Bellarine, Surf Coast, Mount Duneed, Geelong and wider VIC.</p>
+      </div>
+      <div>
+        <h4>Firm</h4>
+        <ul>
+          <li><a href="#approach">Our Approach</a></li>
+          <li><a href="#services">Our Services</a></li>
+          <li><a href="#testimonials">Testimonials</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Wills &amp; Estates</a></li>
+          <li><a href="#services">Conveyancing</a></li>
+          <li><a href="#services">Power of Attorney</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="#contact">Book a Consult</a></li>
+          <li><a href="#contact">Message Us</a></li>
+          <li><a href="#">@taylor.legal</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Taylor Legal. All rights reserved.</span>
+      <span>This site is for general information only and is not legal advice.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  // header bg on scroll
+  const header = document.getElementById('siteHeader');
+  window.addEventListener('scroll', () => {
+    header.style.boxShadow = window.scrollY > 10 ? '0 4px 18px -10px rgba(15,46,34,0.25)' : 'none';
+  });
+
+  // scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => io.observe(el));
+</script>
+
+</body>
+</html>
